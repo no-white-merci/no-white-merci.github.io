@@ -7,28 +7,42 @@
     .container{
       padding: 10px;
     }
-    #text{
-      font-size: 30px;
+    .text{
+      font-size: 7vw;
     }
-    #text2{
-      font-size: 25px;
+    .texts{
+      font-size: 5vw;
     }
     h1{
       border-bottom: 1px solid green;
-      width: 500px;
+      font-size: 7vw;
+      /*width: 500px;*/
+    }
+    h2{
+      font-size: 5vw;
+    }
+    #hei{
+      background-color: skyblue;
+    }
+    #kyu{
+      background-color: pink;
     }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>西消防署経由の時刻表だよん</h1>
-      <h2>学研駅→西消防署前(平日)</h2>
-      <span id="text">次のバスは<span id="h">0</span>時<span id="m">0</span>分です。</span><br>
-      <span id="text2">その次は<span id="h2">0</span>時<span id="m2">0</span>分です。</span>
+      <h1>西消防署経由の時刻表</h1>
+      <h2 id="hei">学研駅→西消防署前(平日)</h2>
+      <span class="text" id="text1">次のバスは<span id="h">0</span>時<span id="m">0</span>分です。</span><br>
+      <span class="texts" id="text2">その次は<span id="h2">0</span>時<span id="m2">0</span>分です。</span>
+      <h2 id="kyu">学研駅→西消防署前(休日)</h2>
+      <span class="text" id="text3">次のバスは<span id="h3">0</span>時<span id="m3">0</span>分です。</span><br>
+      <span class="texts" id="text4">その次は<span id="h4">0</span>時<span id="m4">0</span>分です。</span>
     </div>
   </body>
   <script>
-    var gakken_nishi = [
+    // 平日の時刻表
+    var gakken_nishi_hei = [
       [1,7,40],[0,7,52],[1,7,56],
       [0,8,0],[1,8,4],[0,8,8],[1,8,12],[0,8,16],[0,8,20],[1,8,27],[0,8,37],[0,8,47],[1,8,57],
       [0,9,9],[0,9,25],[0,9,34],[1,9,45],[0,9,53],[1,9,57],
@@ -43,12 +57,25 @@
       [0,18,45],
       [0,20,10],
     ];
+    // 休日の時刻表
+    var gakken_nishi_kyu = [
+      [0,8,0],[1,8,22],[0,8,42],[1,8,55],
+      [1,9,2],[0,9,23],[0,9,40],[1,9,56],
+      [0,10,9],[1,10,24],[0,10,40],[1,10,57],
+      [1,11,9],[0,11,13],[1,11,23],[0,11,38],[1,11,57],
+      [0,13,8],
+      [0,15,10],
+      [1,16,26],
+      [0,17,40],
+    ]
+
     var nishi_gakken = [
       [,],
     ];
     // document.write(hour+"時",+minute+"分"+second+"秒");
+
     // 計算する関数
-    function calc_time(){
+    function calc_time( zikoku, h_id_1, h_id_2, m_id_1, m_id_2, t_id_1, t_id_2){
       //時刻データを取得して変数jikanに格納する
       var jikan= new Date();
       //時・分・秒を取得する
@@ -56,38 +83,42 @@
       var minute = jikan.getMinutes();
       var second = jikan.getSeconds();
       // リストの長さ分繰り返す
-      for (var i=0; i < gakken_nishi.length; i++) {
-        if (gakken_nishi[i][0]==0){
+      for (var i=0; i < zikoku.length; i++) {
+        if (zikoku[i][0]==0){
           // 時刻表から現在時刻より一個進んでいる時刻を検出する
-          if (hour <= gakken_nishi[i][1] && minute < gakken_nishi[i][2]) {
+          if ( (hour == zikoku[i][1] && minute < zikoku[i][2]) || hour < zikoku[i][1]) {
             // alert("yeah");
-            document.getElementById("h").innerHTML=gakken_nishi[i][1];
-            document.getElementById("m").innerHTML=gakken_nishi[i][2];
-            if (i+1 != gakken_nishi.length){
-              for (var j=i+1; j < gakken_nishi.length; j++){
-                if (gakken_nishi[j][0]==0){
-                  document.getElementById("h2").innerHTML=gakken_nishi[j][1];
-                  document.getElementById("m2").innerHTML=gakken_nishi[j][2];
+            document.getElementById(h_id_1).innerHTML=zikoku[i][1];
+            document.getElementById(m_id_1).innerHTML=zikoku[i][2];
+            if (i+1 != zikoku.length){
+              for (var j=i+1; j < zikoku.length; j++){
+                if (zikoku[j][0]==0){
+                  document.getElementById(h_id_2).innerHTML=zikoku[j][1];
+                  document.getElementById(m_id_2).innerHTML=zikoku[j][2];
                   break;
                 }
               }
-              if (j == gakken_nishi.length){
-                document.getElementById("text2").innerHTML="↑終バス";
+              if (j == zikoku.length){
+                document.getElementById(t_id_2).innerHTML="↑終バス";
               }
             } else{
-              document.getElementById("text2").innerHTML="↑終バス";
+              document.getElementById(t_id_2).innerHTML="↑終バス";
             }
             break;
           }
         }
       }
-      if (i == gakken_nishi.length){
-        document.getElementById("text").innerHTML="本日は終了しました。";
-        document.getElementById("text2").style.display = "none";
+      if (i == zikoku.length){
+        document.getElementById(t_id_1).innerHTML="本日は終了しました。";
+        document.getElementById(t_id_2).style.display = "none";
       }
     }
-    calc_time();
-    setInterval("calc_time()", 1000);
+    id_list = ["h", "h2", "m", "m2", "text1", "text2"];
+    calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5]);
+    setInterval("calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
+    id_list = ["h3", "h4", "m3", "m4", "text3", "text4"];
+    calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5]);
+    setInterval("calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
 
   </script>
 </html>

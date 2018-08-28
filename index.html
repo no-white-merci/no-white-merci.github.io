@@ -8,10 +8,10 @@
       padding: 10px;
     }
     .text{
-      font-size: 7vw;
+      font-size: 6vw;
     }
     .texts{
-      font-size: 5vw;
+      font-size: 4vw;
     }
     h1{
       border-bottom: 1px solid green;
@@ -27,19 +27,133 @@
     #kyu{
       background-color: pink;
     }
+    #moto1{
+      display: none;
+    }
+    #moto2{
+      display: none;
+    }
+    #moto3{
+      display: none;
+    }
+    #moto4{
+      display: none;
+    }
+    /*タブ*/
+    .tab, .tab li, .tab li a {
+      float: left;
+      padding:3px;
+      margin-right:2px;
+      list-style: none;
+      position: fixed;
+      bottom: 0;
+      width: calc(100%/3);
+      font-size: 4vw;
+      /*height: 10px*/
+    }
+    a:hover {
+      opacity: 0.8;
+    }
+    .content {
+      clear: both;
+    }
+    .area {
+      display: none;
+    }
+    #t1{
+      background-color: #9FF781;
+      height: 10%;
+      text-align: center;
+    }
+    #t2{
+      left: calc(100%/3);
+      background-color: #F5D0A9;
+      height: 10%;
+      text-align: center;
+    }
+    #t3{
+      left: calc(100%*2/3);
+      background-color: #F5A9BC;
+      height: 10%;
+      text-align: center;
+    }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>西消防署経由の時刻表</h1>
-      <h2 id="hei">学研駅→西消防署前(平日)</h2>
-      <span class="text" id="text1">次のバスは<span id="h">0</span>時<span id="m">0</span>分です。</span><br>
-      <span class="texts" id="text2">その次は<span id="h2">0</span>時<span id="m2">0</span>分です。</span>
-      <h2 id="kyu">学研駅→西消防署前(休日)</h2>
-      <span class="text" id="text3">次のバスは<span id="h3">0</span>時<span id="m3">0</span>分です。</span><br>
-      <span class="texts" id="text4">その次は<span id="h4">0</span>時<span id="m4">0</span>分です。</span>
+    <!-- <div class="container">
+      <h1>産学連携経由の時刻表</h1>
+      <div class="station">
+        <h2 id="hei">学研駅→産学連携前(平日)</h2>
+        <span class="text" id="text1">次のバスは<span id="h">0</span>時<span id="m">0</span>分です。</span><br>
+        <span class="texts" id="text2">その次は<span id="h2">0</span>時<span id="m2">0</span>分です。</span>
+        <h2 id="kyu">学研駅→産学連携前(休日)</h2>
+        <span class="text" id="text3">次のバスは<span id="h3">0</span>時<span id="m3">0</span>分です。</span><br>
+        <span class="texts" id="text4">その次は<span id="h4">0</span>時<span id="m4">0</span>分です。</span>
+      </div>
+      <hr>
+      <div class="house">
+        <h2 id="hei">産学連携前(平日)→学研駅</h2>
+        <span class="text" id="h_text1">次のバス<span id="moto1">(元岡)</span>は<span id="h_h1">0</span>時<span id="h_m1">0</span>分です。</span><br>
+        <span class="texts" id="h_text2">その次<span id="moto2">(元岡)</span>は<span id="h_h2">0</span>時<span id="h_m2">0</span>分です。</span>
+        <h2 id="kyu">産学連携前(休日)→学研駅</h2>
+        <span class="text" id="h_text3">次のバス<span id="moto3">(元岡)</span>は<span id="h_h3">0</span>時<span id="h_m3">0</span>分です。</span><br>
+        <span class="texts" id="h_text4">その次<span id="moto4">(元岡)</span>は<span id="h_h4">0</span>時<span id="h_m4">0</span>分です。</span>
+      </div> -->
+      <!--ここからタブ-->
+      <ul class="tab">
+        <!-- <li id="t1"><a href="#tab1"><img src="https://placehold.jp/3d4070/ffffff/100x50.png?text=家方面" alt="tab1"></a></li>
+        <li id="t2"><a href="#tab2"><img src="https://placehold.jp/d92b45/ffffff/100x50.png?text=駅方面" alt="tab2"></a></li>
+        <li id="t3"><a href="#tab3"><img src="https://placehold.jp/218a33/ffffff/100x50.png?text=時刻表" alt="tab3"></a></li> -->
+        <li><a href="#tab1" id="t1">家方面</a></li>
+        <li><a href="#tab2" id="t2">駅方面</a></li>
+        <li><a href="#tab3" id="t3">時刻表</a></li>
+      </ul>
+      <!-- <h1>産学連携経由バス時刻表</h1> -->
+      <!--ここが切り替わる部分-->
+      <h1>産学連携経由バス時刻表</h1>
+      <div class="content">
+        <div class="area" id="tab1">
+          <h2 id="hei">学研駅→産学連携前(平日)</h2>
+          <span class="text" id="text1">次のバスは<span id="h">0</span>時<span id="m">0</span>分です。</span><br>
+          <span class="texts" id="text2">その次は<span id="h2">0</span>時<span id="m2">0</span>分です。</span>
+          <h2 id="kyu">学研駅→産学連携前(休日)</h2>
+          <span class="text" id="text3">次のバスは<span id="h3">0</span>時<span id="m3">0</span>分です。</span><br>
+          <span class="texts" id="text4">その次は<span id="h4">0</span>時<span id="m4">0</span>分です。</span>
+        </div>
+        <div class="area" id="tab2">
+          <h2 id="hei">産学連携前(平日)→学研駅</h2>
+          <span class="text" id="h_text1">次のバス<span id="moto1">(元岡)</span>は<span id="h_h1">0</span>時<span id="h_m1">0</span>分です。</span><br>
+          <span class="texts" id="h_text2">その次<span id="moto2">(元岡)</span>は<span id="h_h2">0</span>時<span id="h_m2">0</span>分です。</span>
+          <h2 id="kyu">産学連携前(休日)→学研駅</h2>
+          <span class="text" id="h_text3">次のバス<span id="moto3">(元岡)</span>は<span id="h_h3">0</span>時<span id="h_m3">0</span>分です。</span><br>
+          <span class="texts" id="h_text4">その次<span id="moto4">(元岡)</span>は<span id="h_h4">0</span>時<span id="h_m4">0</span>分です。</span>
+        </div>
+        <div class="area" id="tab3">
+          <span style="font-size: 4vw;">時刻表が入る予定</span>
+        </div>
+      </div>
     </div>
+    <span id="hoge"></span>
   </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.contents').hide(); //初期では非表示
+      $('#tab1').show();
+      $('.tab li').click(function() {
+        if($(this).hasClass('active')){
+          $('.area').hide();
+          $($(this).find('a').attr('href')).fadeOut();
+          $('.tab li').removeClass('active');
+        }else{
+          $('.tab li').removeClass('active');
+          $('.area').hide();
+          $($(this).find('a').attr('href')).fadeIn();
+          $(this).addClass('active');
+        }
+      })
+    });
+  </script>
   <script>
     // 平日の時刻表
     var gakken_nishi_hei = [
@@ -68,14 +182,42 @@
       [1,16,26],
       [0,17,40],
     ]
-
-    var nishi_gakken = [
-      [,],
+    //
+    var nishi_gakken_hei = [
+      [2,7,2],[2,7,16],[2,7,49],
+      [2,9,8],
+      [2,10,20],
+      [2,11,47],
+      [2,12,45],
+      [2,13,44],
+      [0,14,29],[1,14,51],[0,14,55],
+      [0,15,24],[0,15,38],[1,15,56],
+      [0,16,3],[0,16,17],[0,16,30],[1,16,36],[0,16,53],[0,16,59],
+      [1,17,4],[1,17,8],[1,17,12],[0,17,16],[0,17,19],[1,17,21],[1,17,26],[0,17,32],[1,17,38],[0,17,47][0,17,50],
+      [1,18,8],[1,18,11],[0,18,14],[1,18,18],[0,18,27],[1,18,37],[0,18,40],[1,18,57],
+      [0,19,0],[1,19,7],[0,19,14],[0,19,28],[0,19,56],
+      [0,20,21],[1,20,28],[0,20,33],[0,20,41],[1,20,46],[0,20,56],
+      [1,21,6],[0,21,16],[0,21,26],[1,21,36],[0,21,46],[0,21,56],
+      [0,22,21],
     ];
+    //
+    var nishi_gakken_kyu = [
+      [2,7,48],
+      [2,9,11],
+      [2,10,17],
+      [2,13,41],
+      [2,15,26],[0,15,38],[1,15,56],
+      [1,16,16],[1,16,29],[1,16,52],
+      [1,17,4],[0,17,20],[0,17,34],[1,17,48],
+      [1,18,7],[0,18,21],[1,18,36],[1,18,50],
+      [1,19,14],[0,19,28],[1,19,50],
+      [1,20,19],[1,20,33],[0,20,56],
+      [1,21,16],[1,21,36],
+    ]
     // document.write(hour+"時",+minute+"分"+second+"秒");
 
     // 計算する関数
-    function calc_time( zikoku, h_id_1, h_id_2, m_id_1, m_id_2, t_id_1, t_id_2){
+    function calc_time( zikoku, h_id_1, h_id_2, m_id_1, m_id_2, t_id_1, t_id_2, moto_id_1, moto_id_2){
       //時刻データを取得して変数jikanに格納する
       var jikan= new Date();
       //時・分・秒を取得する
@@ -84,17 +226,27 @@
       var second = jikan.getSeconds();
       // リストの長さ分繰り返す
       for (var i=0; i < zikoku.length; i++) {
-        if (zikoku[i][0]==0){
+        if (zikoku[i][0]==0 || zikoku[i][0]==2){
           // 時刻表から現在時刻より一個進んでいる時刻を検出する
           if ( (hour == zikoku[i][1] && minute < zikoku[i][2]) || hour < zikoku[i][1]) {
             // alert("yeah");
             document.getElementById(h_id_1).innerHTML=zikoku[i][1];
             document.getElementById(m_id_1).innerHTML=zikoku[i][2];
+            if (zikoku[i][0] == 2){
+              document.getElementById(moto_id_1).style.display= "inline";
+            } else{
+              document.getElementById(moto_id_1).style.display="none";
+            }
             if (i+1 != zikoku.length){
               for (var j=i+1; j < zikoku.length; j++){
                 if (zikoku[j][0]==0){
                   document.getElementById(h_id_2).innerHTML=zikoku[j][1];
                   document.getElementById(m_id_2).innerHTML=zikoku[j][2];
+                  if (zikoku[j][0] == 2){
+                    document.getElementById(moto_id_2).style.display="inline";
+                  } else{
+                    document.getElementById(moto_id_2).style.display="none";
+                  }
                   break;
                 }
               }
@@ -113,12 +265,20 @@
         document.getElementById(t_id_2).style.display = "none";
       }
     }
-    id_list = ["h", "h2", "m", "m2", "text1", "text2"];
-    calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5]);
+    // to station
+    id_list = ["h", "h2", "m", "m2", "text1", "text2", "hoge", "hoge"];
+    calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
     setInterval("calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
-    id_list = ["h3", "h4", "m3", "m4", "text3", "text4"];
-    calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5]);
+    id_list = ["h3", "h4", "m3", "m4", "text3", "text4", "hoge", "hoge"];
+    calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
     setInterval("calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
+    // to house
+    id_list = ["h_h1", "h_h2", "h_m1", "h_m2", "h_text1", "h_text2", "moto1", "moto2"];
+    calc_time(nishi_gakken_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+    setInterval("calc_time(nishi_gakken_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
+    id_list = ["h_h3", "h_h4", "h_m3", "h_m4", "h_text3", "h_text4" , "moto3", "moto4"];
+    calc_time(nishi_gakken_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+    setInterval("calc_time(nishi_gakken_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
 
   </script>
 </html>

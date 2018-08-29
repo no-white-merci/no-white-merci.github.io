@@ -120,6 +120,7 @@
           <span class="text" id="text3">次のバスは<span id="h3">0</span>時<span id="m3">0</span>分です。</span><br>
           <span class="texts" id="text4">その次は<span id="h4">0</span>時<span id="m4">0</span>分です。</span>
         </div>
+
         <div class="area" id="tab2">
           <h2 id="hei">産学連携前(平日)→学研駅</h2>
           <span class="text" id="h_text1">次のバス<span id="moto1">(元岡)</span>は<span id="h_h1">0</span>時<span id="h_m1">0</span>分です。</span><br>
@@ -128,6 +129,7 @@
           <span class="text" id="h_text3">次のバス<span id="moto3">(元岡)</span>は<span id="h_h3">0</span>時<span id="h_m3">0</span>分です。</span><br>
           <span class="texts" id="h_text4">その次<span id="moto4">(元岡)</span>は<span id="h_h4">0</span>時<span id="h_m4">0</span>分です。</span>
         </div>
+
         <div class="area" id="tab3">
           <span style="font-size: 4vw;">時刻表が入る予定</span>
         </div>
@@ -135,25 +137,6 @@
     </div>
     <span id="hoge"></span>
   </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      $('.contents').hide(); //初期では非表示
-      $('#tab1').show();
-      $('.tab li').click(function() {
-        if($(this).hasClass('active')){
-          $('.area').hide();
-          $($(this).find('a').attr('href')).fadeOut();
-          $('.tab li').removeClass('active');
-        }else{
-          $('.tab li').removeClass('active');
-          $('.area').hide();
-          $($(this).find('a').attr('href')).fadeIn();
-          $(this).addClass('active');
-        }
-      })
-    });
-  </script>
   <script>
     // 平日の時刻表
     var gakken_nishi_hei = [
@@ -181,7 +164,7 @@
       [0,15,10],
       [1,16,26],
       [0,17,40],
-    ]
+    ];
     //
     var nishi_gakken_hei = [
       [2,7,2],[2,7,16],[2,7,49],
@@ -213,7 +196,7 @@
       [1,19,14],[0,19,28],[1,19,50],
       [1,20,19],[1,20,33],[0,20,56],
       [1,21,16],[1,21,36],
-    ]
+    ];
     // document.write(hour+"時",+minute+"分"+second+"秒");
 
     // 計算する関数
@@ -226,20 +209,20 @@
       var second = jikan.getSeconds();
       // リストの長さ分繰り返す
       for (var i=0; i < zikoku.length; i++) {
+        // console.log(zikoku[i]);
         if (zikoku[i][0]==0 || zikoku[i][0]==2){
           // 時刻表から現在時刻より一個進んでいる時刻を検出する
           if ( (hour == zikoku[i][1] && minute < zikoku[i][2]) || hour < zikoku[i][1]) {
-            // alert("yeah");
             document.getElementById(h_id_1).innerHTML=zikoku[i][1];
             document.getElementById(m_id_1).innerHTML=zikoku[i][2];
             if (zikoku[i][0] == 2){
-              document.getElementById(moto_id_1).style.display= "inline";
+              document.getElementById(moto_id_1).style.display="inline";
             } else{
               document.getElementById(moto_id_1).style.display="none";
             }
             if (i+1 != zikoku.length){
               for (var j=i+1; j < zikoku.length; j++){
-                if (zikoku[j][0]==0){
+                if (zikoku[j][0]!=1){
                   document.getElementById(h_id_2).innerHTML=zikoku[j][1];
                   document.getElementById(m_id_2).innerHTML=zikoku[j][2];
                   if (zikoku[j][0] == 2){
@@ -260,25 +243,46 @@
           }
         }
       }
+      // console.log("----------------------")
+      // console.log(i);
+      // console.log(zikoku.length);
       if (i == zikoku.length){
         document.getElementById(t_id_1).innerHTML="本日は終了しました。";
         document.getElementById(t_id_2).style.display = "none";
       }
     }
     // to station
-    id_list = ["h", "h2", "m", "m2", "text1", "text2", "hoge", "hoge"];
-    calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
-    setInterval("calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
-    id_list = ["h3", "h4", "m3", "m4", "text3", "text4", "hoge", "hoge"];
-    calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
-    setInterval("calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
-    // to house
-    id_list = ["h_h1", "h_h2", "h_m1", "h_m2", "h_text1", "h_text2", "moto1", "moto2"];
-    calc_time(nishi_gakken_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
-    setInterval("calc_time(nishi_gakken_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
-    id_list = ["h_h3", "h_h4", "h_m3", "h_m4", "h_text3", "h_text4" , "moto3", "moto4"];
-    calc_time(nishi_gakken_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
-    setInterval("calc_time(nishi_gakken_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5])", 1000);
-
+    function loop(){
+      id_list = ["h", "h2", "m", "m2", "text1", "text2", "hoge", "hoge"];
+      calc_time(gakken_nishi_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+      id_list = ["h3", "h4", "m3", "m4", "text3", "text4", "hoge", "hoge"];
+      calc_time(gakken_nishi_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+      id_list = ["h_h1", "h_h2", "h_m1", "h_m2", "h_text1", "h_text2", "moto1", "moto2"];
+      calc_time(nishi_gakken_hei, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+      id_list = ["h_h3", "h_h4", "h_m3", "h_m4", "h_text3", "h_text4", "moto3", "moto4"];
+      calc_time(nishi_gakken_kyu, id_list[0], id_list[1], id_list[2], id_list[3], id_list[4], id_list[5], id_list[6], id_list[7]);
+    }
+    loop();
+    setInterval("loop()", 1000);
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.contents').hide(); //初期では非表示
+      $('#tab1').show();
+      $('.tab li').click(function() {
+        if($(this).hasClass('active')){
+          $('.area').hide();
+          $($(this).find('a').attr('href')).fadeOut();
+          $('.tab li').removeClass('active');
+        }else{
+          $('.tab li').removeClass('active');
+          $('.area').hide();
+          $($(this).find('a').attr('href')).fadeIn();
+          $(this).addClass('active');
+        }
+      })
+    });
   </script>
 </html>
+
